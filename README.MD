@@ -1,6 +1,7 @@
-# rpg-sage-creative/x-utils
-This repo is a utils collection for RSC projects.
-It's purpose is simply to provide reusable code.
+# rpg-sage-creative/color-utils
+
+This repo has color parsing and manipulation logic.
+It also contains an optional set of named colors.
 
 ## Node
 
@@ -15,3 +16,7 @@ One of the actions performed by the build script is to create an `index.ts` file
 ## Notes about tsdoc / jsdoc
 
 The build scripts included in this repo perform a dual pass build. One builds everything with an entire tsdoc. The second redoes the tsdoc files to remove any documentation with `@internal` in the description.
+
+# v1.1.0
+
+As of v1.1.0 this repo assumes you are using pnpm (instead of npm) and that you are making use of the updated `v1.3.0` version of `dev-scripts`.
