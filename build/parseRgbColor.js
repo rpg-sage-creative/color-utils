@@ -2,11 +2,12 @@ import { matchRgb } from "./internal/matchRgb.js";
 export function parseRgbColor(value, includeAlpha) {
     const match = matchRgb(value);
     if (!match)
-        return undefined;
+        return undefined; // NOSONAR
     const { red, green, blue, alpha } = match;
     if (includeAlpha === false) {
         return { red, green, blue };
     }
+    // Because this is a decimal representation of 0%-100%, values are rounded to precision 2: 0.00
     const roundedAlpha = alpha !== undefined
         ? Math.round(alpha * 100) / 100
         : undefined;

@@ -2,7 +2,7 @@ import { matchHex } from "./internal/matchHex.js";
 export function parseHexColor(value, includeAlpha) {
     const match = matchHex(value);
     if (!match)
-        return undefined;
+        return undefined; // NOSONAR
     let hex = match.digits.toLowerCase();
     if (hex.length < 5) {
         hex = [...hex].map(d => d + d).join("");

@@ -2,7 +2,7 @@ import { matchRgb } from "./internal/matchRgb.js";
 export function isRgbColorString(color, withAlpha) {
     const match = matchRgb(color);
     if (!match)
-        return false;
+        return false; // NOSONAR
     if (withAlpha === true) {
         return match.alpha !== undefined;
     }

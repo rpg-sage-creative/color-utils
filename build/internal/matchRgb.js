@@ -1,28 +1,54 @@
+/*
+const RgbRegExp = regex("i")`
+    rgb
+    (?<rgba> a )?     # optional "a" for rgba
+    \(
+    (?<r> \d{1,3} )   # red
+    ,
+    (?<g> \d{1,3} )   # green
+    ,
+    (?<b> \d{1,3} )   # blue
+    (
+        ,
+        (?<a>         # alpha
+            1(\.0+)?  # 1, 1.0, 1.00, etc
+            |         # or
+            0\.\d+    # 0.xzy
+        )
+    )?                # optional alpha
+    \)
+` as TypedRegExp<RgbRegExpGroups>;
+*/
 const RgbRegExp = /rgb(?<rgba>a)?\((?<r>\d{1,3}),(?<g>\d{1,3}),(?<b>\d{1,3})(?:,(?<a>1(?:\.0+)?|0\.\d+))?\)/iv;
+/**
+ * @internal
+ * Gets a RegExpMatchArray from the value that includes colors and alpha.
+ */
 export function matchRgb(value) {
     if (!value)
-        return undefined;
+        return undefined; // NOSONAR
     const groups = RgbRegExp.exec(value.replaceAll(" ", ""))?.groups;
     if (!groups)
-        return undefined;
+        return undefined; // NOSONAR
     const { rgba, r, g, b, a } = groups;
+    // make sure alpha is present (or not) as expected
     if (rgba && a === undefined)
-        return undefined;
+        return undefined; // NOSONAR
     if (!rgba && a !== undefined)
-        return undefined;
+        return undefined; // NOSONAR
     const red = +r;
     if (red < 0 || red > 255)
-        return undefined;
+        return undefined; // NOSONAR
     const green = +g;
     if (green < 0 || green > 255)
-        return undefined;
+        return undefined; // NOSONAR
     const blue = +b;
     if (blue < 0 || blue > 255)
-        return undefined;
+        return undefined; // NOSONAR
     if (rgba) {
         const alpha = +a;
         if (alpha < 0 || alpha > 1)
-            return undefined;
+            return undefined; // NOSONAR
         return { red, green, blue, alpha };
     }
     return { red, green, blue };
